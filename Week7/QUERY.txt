@@ -1,0 +1,55 @@
+1. 	SELECT * FROM CAUTHU	
+--------------------------
+2. SELECT * FROM CAUTHU
+WHERE CAUTHU.SO =7
+AND CAUTHU.VITRI=N'Ti?n v?'
+--------------------------
+3. SELECT TENHLV, DIACHI, DIENTHOAI, NGAYSINH FROM HUANLUYENVIEN
+-------------------------------
+4. SELECT c.HOTEN, c.DIACHI, c.NGAYSINH, c.SO, c.VITRI, c.MACLB FROM CAUTHU as c, QUOCGIA as q, CAULACBO as clb
+WHERE c.MACLB = clb.MACLB
+AND c.MAQG = q.MAQG
+AND q.TENQG =N'Vi?t Nam'
+AND clb.TENCLB =N'Becamex Bình Duong'
+
+-----------------------------------
+5. SELECT c.MACT, c.HOTEN, c.DIACHI, c.NGAYSINH, c.VITRI FROM CAUTHU as c, QUOCGIA as q, CAULACBO as clb
+WHERE c.MACLB = clb.MACLB
+AND c.MAQG = q.MAQG
+AND q.TENQG =N'Brazil'
+AND clb.TENCLB =N'SHB Ðà N?ng'
+------------------------------------
+6. SELECT c.HOTEN FROM CAUTHU AS c, CAULACBO as clb, SANVD as s
+WHERE c.MACLB = clb.MACLB
+AND clb.MASAN = s.MASAN
+AND s.TENSAN=N'Sân Long An'
+
+------------------------------
+SELECT t.MATRAN, t.NGAYTD, s.TENSAN, c1.TENCLB as CLB1, c2.TENCLB as CLB2	, t.KETQUA FROM TRANDAU AS t, CAULACBO as c1, CAULACBO as c2, SANVD as s
+
+WHERE t.NAM=2009
+AND t.VONG=2
+AND c1.MACLB = t.MACLB1
+AND c2.MACLB = t.MACLB2
+AND s.MASAN = t.MASAN
+
+-----------------------------------
+8. SELECT h.MAHLV, h.TENHLV, h.NGAYSINH, h.DIACHI, hl.VAITRO, clb.TENCLB FROM HUANLUYENVIEN as h, CAULACBO as clb, HLV_CLB as hl, QUOCGIA as q
+where q.TENQG =N'Vi?t Nam'
+and h.MAHLV=hl.MAHLV
+and q.MAQG = h.MAQG
+and clb.MACLB = hl.MACLB
+
+---------------------------
+select top(3) c.TENCLB from BANGXH as b, CAULACBO as c
+where b.MACLB = c.MACLB
+and b.VONG<4 and b.NAM=2009
+group by c.TENCLB
+order by SUM(b.DIEM) desc
+
+--------------------------
+10. select h.MAHLV, h.TENHLV, h.NGAYSINH, h.DIACHI, hl.VAITRO, c.TENCLB from HUANLUYENVIEN as h, HLV_CLB as hl, CAULACBO as c , TINH as t
+where h.MAHLV = hl.MAHLV
+and hl.MACLB = c.MACLB
+and c.MATINH = t.MATINH
+and t.TENTINH=N'Bình Duong'
